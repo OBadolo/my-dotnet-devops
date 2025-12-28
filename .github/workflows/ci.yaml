@@ -1,0 +1,19 @@
+name: Build and Test Docker
+
+# 1. Quand est-ce que ce robot doit s'activer ?
+on:
+  push:
+    branches: [ "main" ]  # Dès qu'on push sur la branche main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # On demande à GitHub de nous prêter un PC Linux
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Le robot télécharge ton code
+
+    - name: Build Docker Image
+      run: |
+        cd MyApi
+        docker build -t mon-api-devops:latest .
